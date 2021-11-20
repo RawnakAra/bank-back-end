@@ -85,7 +85,7 @@ const transferring = (req,res)=>{
         if(err)
          return res.status(401).send(err.message)
          //withdrawMoney(req,res)
-         const newCash = (data.cash - cash );
+         const newCash = (data.cash - parseInt(cash) );
            const newCredit = data.credit - cash
          if(newCash > 0 && newCredit >0 ){
             bank.findByIdAndUpdate(from,{cash :newCash } ,{runValidators : true , new : true} ,(err ,data2)=>{
@@ -96,7 +96,7 @@ const transferring = (req,res)=>{
               bank.findById(to,(err ,data)=>{
                 if(err)
                  return res.status(401).send(err.message) 
-                 bank.findByIdAndUpdate(to,{cash :(data.cash)+(cash) },{runValidators : true , new : true} ,(err ,data1)=>{
+                 bank.findByIdAndUpdate(to,{cash :(data.cash)+parseInt(cash) },{runValidators : true , new : true} ,(err ,data1)=>{
                     if(err)
                     return res.status(404).send(err.message)
                     return res.status(200).json({data2 ,data1})
