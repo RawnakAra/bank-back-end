@@ -14,7 +14,7 @@ router.get('/',(req,res)=>{
     bankData.depositing(req,res)
 }).put('/withdraw/:id',(req ,res)=>{
     bankData.withdrawMoney(req ,res)
-}).put('/transferring/:from/:to' ,(req,res)=>{
+}).put('/transfering/:from/:to' ,(req,res)=>{
     bankData.transferring(req,res)
 })
 

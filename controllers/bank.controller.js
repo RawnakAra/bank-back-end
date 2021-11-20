@@ -11,9 +11,9 @@ const showDetailsOfAllUsers= (req,res)=>{
 const showDetailsOfUser = (req,res)=>{
     const {id} = req.params
     bank.findById(id ,(err , data)=>{
-
         if(err)
         return res.status(404).send(err.message)
+        if (!data) return res.status(404).json({error: {message: 'User does not exist!'}})
         return res.status(200).json(data)  
     })
 }
@@ -65,7 +65,7 @@ const withdrawMoney = (req,res)=>{
         const newCredit = data.credit - cash
       //  console.log(newCredit);
         if(newCash > 0 && newCredit >0 ){
-            bank.findByIdAndUpdate(id ,{cash :newCash } ,{runValidators : true , new : true} ,(err ,data)=>{
+            bank.findByIdAndUpdate(id ,{cash :newCash ,credit : newCredit} ,{runValidators : true , new : true} ,(err ,data)=>{
               // console.log('11');
                 if(err)
                 return res.status(401).send(err.message)
